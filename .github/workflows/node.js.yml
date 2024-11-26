@@ -1,0 +1,68 @@
+# Ce workflow est déclenché suite à un push, une pull_request acceptée, ou manuellement
+# Il contient 2 étapes : un build du projet Angular avec Node.js, puis un déploiement sur GitHub Pages
+
+name: Node.js CI + Github Pages
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  # Etape de build du projet Angular avec Node.js
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Se place dans le repo pour accéder aux fichiers source
+      - name: Access repo
+        uses: actions/checkout@v4
+      # Installe Node.js dans le conteneur
+      - name: Use Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.x'
+          cache: 'npm'
+      # Installe les dépendances
+      - name: Install dependencies
+        run: npm ci
+      # Build le projet
+      - name: Build project
+        run: npm run build --if-present
+      # Recopie la page index.html en 404.html pour faire fonctionner le routeur d'Angular sur différentes URL
+      - name: Copy index.html to 404.html
+        run: cp dist/todo/browser/index.html dist/todo/browser/404.html
+      # Stocke les fichiers générés dans le répertoire "dist/todo/browser/" pour pouvoir les utiliser à l'étape suivante (déploiement)
+      - name: Upload static files as artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist/todo/browser/
+          name: github-pages
+
+  # Etape de déploiement sur GitHub Pages
+  deploy:
+    # Il faut exécuter le build avant cette étape
+    needs: build
+
+    # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
+    permissions:
+      pages: write      # to deploy to Pages
+      id-token: write   # to verify the deployment originates from an appropriate source
+
+    # Deploy to the github-pages environment
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    # Specify runner + deployment step
+    runs-on: ubuntu-latest
+    steps:
+      # Upload sur GitHub Pages les fichiers générés durant l'étape de build
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+        with:
+          artifact_name: github-pages

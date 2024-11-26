@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     extend: {
       cursor: {
-        vernis: 'url("/images/vernis.png"), pointer',
+        vernis: 'url("/globelle-front/images/vernis.png"), pointer',
       },
     },
   },

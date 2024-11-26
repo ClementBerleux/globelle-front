@@ -34,12 +34,12 @@ jobs:
         run: npm run build --if-present
       # Recopie la page index.html en 404.html pour faire fonctionner le routeur d'Angular sur différentes URL
       - name: Copy index.html to 404.html
-        run: cp dist/todo/browser/index.html dist/todo/browser/404.html
+        run: cp dist/globelle/browser/index.html dist/globelle/browser/404.html
       # Stocke les fichiers générés dans le répertoire "dist/todo/browser/" pour pouvoir les utiliser à l'étape suivante (déploiement)
       - name: Upload static files as artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: dist/todo/browser/
+          path: dist/globelle/browser/
           name: github-pages
 
   # Etape de déploiement sur GitHub Pages

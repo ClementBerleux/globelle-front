@@ -14,6 +14,30 @@ export class SearchResultsComponent {
 
   public search: string = '';
 
+  public services = [
+    {
+      name: 'Manucure',
+      prestataire: 'Robert',
+      prix: '35€',
+      nbAvis: 18,
+      note: 4,
+    },
+    {
+      name: 'Vernis',
+      prestataire: 'Michel',
+      prix: '15€',
+      nbAvis: 7,
+      note: 2,
+    },
+    {
+      name: 'Extension cils',
+      prestataire: 'Bernard',
+      prix: '88€',
+      nbAvis: 13,
+      note: 5,
+    },
+  ];
+
   ngOnInit() {
     this.route.queryParamMap.subscribe((params) => {
       this.search = params.get('search') || '';

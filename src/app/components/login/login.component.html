@@ -1,26 +1,73 @@
-<div class="flex flex-col justify-center items-center mt-20 mb-8">
-  <h1 class="text-center text-2xl font-semibold p-2">
-    Connexion en utilisateur
-  </h1>
-  <input
-    type="text"
-    class="w-[22rem] px-4 py-2 m-2 bg-neutral-200 border border-gray-400 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:border-none focus:ring-2 focus:ring-pink-500 caret-pink-500"
-    placeholder="adresse@mail.fr"
-  />
-  <input
-    type="password"
-    class="w-[22rem] px-4 py-2 m-2 bg-neutral-200 border border-gray-400 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:border-none focus:ring-2 focus:ring-pink-500 caret-pink-500"
-    placeholder="mot de passe"
-  />
-  <button
-    class="m-4 px-8 py-2 cursor-vernis font-semibold border border-pink-300 hover:text-white hover:bg-gradient-to-r hover:from-pink-500 hover:to-purple-500 rounded-full"
+<div class="flex flex-col justify-center items-center mt-16 mb-8">
+  <nav
+    class="flex gap-x-1 justify-center bg-white"
+    aria-label="Tabs"
+    role="tablist"
+    aria-orientation="horizontal"
   >
-    Connexion
-  </button>
-  <p>ou</p>
-  <button
-    class="m-4 px-8 py-2 cursor-vernis font-semibold border border-pink-300 hover:text-white hover:bg-gradient-to-r hover:from-pink-500 hover:to-purple-500 rounded-full"
+    <button
+      type="button"
+      class="-mb-px py-3 px-4 inline-flex items-center shadow-xl gap-x-2 text-sm font-medium text-center border rounded-t-lg dark:bg-neutral-700 dark:border-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-200 dark:focus:text-neutral-200"
+      [class]="
+        !isProvider
+          ? 'text-white bg-gradient-to-r from-pink-500 to-purple-500 opacity-50'
+          : 'bg-neutral-100'
+      "
+      id="card-type-tab-item-1"
+      aria-selected="true"
+      data-hs-tab="#card-type-tab-preview"
+      aria-controls="card-type-tab-preview"
+      role="tab"
+      (click)="isProvider = false"
+    >
+      Connexion en tant qu'utilisateur
+    </button>
+    <button
+      type="button"
+      class="-mb-px py-3 px-4 inline-flex items-center shadow-xl gap-x-2 text-sm font-medium text-center border rounded-t-lg dark:bg-neutral-700 dark:border-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-200 dark:focus:text-neutral-200"
+      [class]="
+        isProvider
+          ? 'text-white bg-gradient-to-r from-pink-500 to-purple-500 opacity-50'
+          : 'bg-neutral-100'
+      "
+      id="card-type-tab-item-2"
+      aria-selected="false"
+      data-hs-tab="#card-type-tab-2"
+      aria-controls="card-type-tab-2"
+      role="tab"
+      (click)="isProvider = true"
+    >
+      Connexion en tant que prestataire
+    </button>
+  </nav>
+  <div
+    class="flex flex-col justify-center items-center border-b border-gray-200 dark:border-neutral-700 bg-white w-[32rem] rounded-md shadow-sm"
   >
-    S'inscrire
-  </button>
+    @if (isProvider) {
+    <h1 class="text-center text-2xl font-semibold p-2">Prestataire</h1>
+    }@else {
+    <h1 class="text-center text-2xl font-semibold p-2">Utilisateur</h1>
+    }
+    <input
+      type="text"
+      class="w-[22rem] px-4 py-2 m-2 bg-neutral-200 border border-gray-400 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:border-none focus:ring-2 focus:ring-pink-500 caret-pink-500"
+      placeholder="adresse@mail.fr"
+    />
+    <input
+      type="password"
+      class="w-[22rem] px-4 py-2 m-2 bg-neutral-200 border border-gray-400 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:border-none focus:ring-2 focus:ring-pink-500 caret-pink-500"
+      placeholder="mot de passe"
+    />
+    <button
+      class="m-4 px-8 py-2 cursor-vernis font-semibold border border-pink-300 hover:text-white hover:bg-gradient-to-r hover:from-pink-500 hover:to-purple-500 rounded-full"
+    >
+      Connexion
+    </button>
+    <p>ou</p>
+    <button
+      class="m-4 px-8 py-2 cursor-vernis font-semibold border border-pink-300 hover:border-pink-600 rounded-full"
+    >
+      S'inscrire
+    </button>
+  </div>
 </div>

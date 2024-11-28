@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { Provider } from '../../models/provider';
+import { ProviderService } from '../../services/provider.service';
 
 @Component({
   selector: 'app-search-results',
@@ -10,39 +12,16 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
   styleUrl: './search-results.component.css',
 })
 export class SearchResultsComponent {
-  public constructor(public route: ActivatedRoute) {}
-
   public search: string = '';
 
-  public services = [
-    {
-      name: 'Manucure',
-      prestataire: 'Roberto',
-      prix: '35€',
-      nbAvis: 18,
-      note: 4,
-      dispo: [true, false, true, true, false, false, true],
-      isfavorite: false,
-    },
-    {
-      name: 'Vernis',
-      prestataire: 'Michel',
-      prix: '15€',
-      nbAvis: 7,
-      note: 2,
-      dispo: [true, true, true, true, true, false, false],
-      isfavorite: true,
-    },
-    {
-      name: 'Extension cils',
-      prestataire: 'Bernard',
-      prix: '88€',
-      nbAvis: 13,
-      note: 5,
-      dispo: [true, true, false, false, false, true, false],
-      isfavorite: false,
-    },
-  ];
+  public prestataires: Provider[];
+
+  constructor(
+    public route: ActivatedRoute,
+    public servicePrestataires: ProviderService
+  ) {
+    this.prestataires = servicePrestataires.getPrestataires();
+  }
 
   ngOnInit() {
     this.route.queryParamMap.subscribe((params) => {

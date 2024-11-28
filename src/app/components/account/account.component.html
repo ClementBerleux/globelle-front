@@ -1,0 +1,138 @@
+<div class="p-6 flex items-center justify-center">
+  <div class="container max-w-screen-lg mx-auto">
+    <div class="bg-white rounded-xl shadow-lg py-2 px-4 md:p-4 mb-6">
+      @if(true){
+      <h2 class="text-center font-semibold text-xl text-gray-600 p-2">
+        Inscription
+      </h2>
+      }@else {
+      <h2 class="text-center font-semibold text-xl text-gray-600">
+        Modification
+      </h2>
+      }
+
+      <div
+        class="grid gap-4 gap-y-2 text-sm grid-cols-1 sm:grid-cols-2 md:grid-cols-4"
+      >
+        <div class="md:col-span-2">
+          <label>
+            Nom
+            <input
+              type="text"
+              name="lastname"
+              class="mt-1 px-4 py-2 w-full bg-neutral-100 border border-gray-400 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-pink-500 caret-pink-500"
+              value=""
+            />
+          </label>
+        </div>
+
+        <div class="md:col-span-2">
+          <label>
+            Prénom
+            <input
+              type="text"
+              name="firstname"
+              class="mt-1 px-4 py-2 w-full bg-neutral-100 border border-gray-400 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-pink-500 caret-pink-500"
+              value=""
+            />
+          </label>
+        </div>
+
+        <div class="md:col-span-3">
+          <label
+            >Email
+            <input
+              type="text"
+              name="email"
+              class="mt-1 px-4 py-2 w-full bg-neutral-100 border border-gray-400 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-pink-500 caret-pink-500"
+              value=""
+              placeholder="email@domain.com"
+            />
+          </label>
+        </div>
+
+        <div class="md:col-span-1">
+          <label>
+            Téléphone
+            <!-- <span class="validity"></span> -->
+            <input
+              type="tel"
+              name="phone"
+              class="mt-1 px-4 py-2 w-full bg-neutral-100 border border-gray-400 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-pink-500 caret-pink-500"
+              value=""
+              pattern="0[0-9]{9}"
+              required
+            />
+          </label>
+        </div>
+
+        <div class="sm:col-span-2 md:col-span-4">
+          <label
+            >Adresse
+            <input
+              type="text"
+              name="address"
+              class="mt-1 px-4 py-2 w-full bg-neutral-100 border border-gray-400 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-pink-500 caret-pink-500"
+              value=""
+              placeholder=""
+            />
+          </label>
+        </div>
+
+        <div class="md:col-span-3">
+          <label
+            >Ville
+            <input
+              type="text"
+              name="city"
+              class="mt-1 px-4 py-2 w-full bg-neutral-100 border border-gray-400 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-pink-500 caret-pink-500"
+              value=""
+              placeholder=""
+            />
+          </label>
+        </div>
+
+        <div class="md:col-span-1">
+          <label
+            >Code postal
+            <input
+              type="text"
+              name="zipcode"
+              class="mt-1 px-4 py-2 w-full bg-neutral-100 border border-gray-400 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-pink-500 caret-pink-500"
+              placeholder=""
+              value=""
+            />
+          </label>
+        </div>
+
+        <div class="sm:col-span-2 md:col-span-4">
+          <label
+            >Description
+            <textarea
+              rows="5"
+              type="text"
+              name="zipcode"
+              class="mt-1 px-4 py-2 w-full resize-none bg-neutral-100 border border-gray-400 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-pink-500 caret-pink-500"
+              placeholder=""
+              value=""
+            ></textarea>
+          </label>
+        </div>
+
+        <button
+          routerLink="/booking"
+          class="mt-2 py-2 w-full md:col-span-2 cursor-vernis font-semibold border border-pink-300 hover:border-pink-600 rounded-xl"
+        >
+          Supprimer votre compte
+        </button>
+
+        <button
+          routerLink="/booking"
+          class="mt-2 py-2 w-full md:col-start-4 cursor-vernis font-semibold border border-pink-300 hover:text-white hover:bg-gradient-to-r hover:from-pink-500 hover:to-purple-500 rounded-xl"
+        >
+          Valider
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

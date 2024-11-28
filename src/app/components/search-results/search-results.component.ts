@@ -17,7 +17,7 @@ export class SearchResultsComponent {
   public services = [
     {
       name: 'Manucure',
-      prestataire: 'Robert',
+      prestataire: 'Roberto',
       prix: '35€',
       nbAvis: 18,
       note: 4,

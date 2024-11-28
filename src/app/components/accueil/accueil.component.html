@@ -7,17 +7,19 @@
       type="text"
       class="w-[24rem] sm:w-[36rem] px-4 py-2 bg-neutral-200 border border-gray-400 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-pink-500 caret-pink-500"
       placeholder="manucure, épilation, onglerie, maquillage..."
+      [(ngModel)]="search"
     />
     <div class="relative">
       <svg
-        class="absolute -left-12 w-10 h-10 text-gray-500 hover:text-gray-800 hover:cursor-vernis"
+        class="absolute -left-12 w-10 h-10 text-gray-500 hover:text-gray-800 hover:cursor-vernis focus:outline-none"
         aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         width="24"
         height="24"
         fill="none"
         viewBox="0 0 24 24"
-        [routerLink]="'/result'"
+        routerLink="/result"
+        [queryParams]="{ search: search }"
       >
         <path
           stroke="currentColor"

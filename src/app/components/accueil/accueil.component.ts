@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-accueil',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, FormsModule],
   templateUrl: './accueil.component.html',
   styleUrl: './accueil.component.css',
 })
@@ -17,4 +18,6 @@ export class AccueilComponent {
     { name: 'Extension de cils', image: 'images/categories/Belle5.png' },
     { name: 'Soin', image: 'images/categories/Belle6.png' },
   ];
+
+  public search: string = '';
 }

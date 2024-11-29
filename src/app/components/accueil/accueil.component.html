@@ -19,7 +19,7 @@
         fill="none"
         viewBox="0 0 24 24"
         routerLink="/result"
-        [queryParams]="{ search: search }"
+        [queryParams]="{ search: search() }"
       >
         <path
           stroke="currentColor"
@@ -35,20 +35,20 @@
   <div
     class="grid grid-cols-2 sm:grid-cols-3 content-center justify-items-center gap-4"
   >
-    @for (categorie of categories; track $index) {
+    @for (categorie of categories(); track $index) {
     <div
       class="w-[10rem] flex flex-col cursor-vernis bg-white dark:bg-neutral-900 border dark:border-neutral-700 shadow-sm hover:shadow-lg rounded-xl dark:shadow-neutral-50/70"
       [routerLink]="['/result']"
-      [queryParams]="{ search: categorie.name }"
+      [queryParams]="{ search: categorie.categorieService }"
     >
       <img
         class="w-full h-auto rounded-t-xl"
-        [src]="categorie.image"
-        [alt]="categorie.name"
+        [src]="'images/categories/manucure.webp'"
+        [alt]="categorie.categorieService"
       />
       <div class="p-1">
         <h3 class="text-lg text-center font-bold text-gray-800 dark:text-white">
-          {{ categorie.name }}
+          {{ categorie.categorieService }}
         </h3>
       </div>
     </div>

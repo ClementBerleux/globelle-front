@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Provider } from '../../models/provider';
@@ -12,20 +12,20 @@ import { ProviderService } from '../../services/provider.service';
   styleUrl: './search-results.component.css',
 })
 export class SearchResultsComponent {
-  public search: string = '';
-
-  public prestataires: Provider[];
+  readonly search = signal<string>('');
+  readonly providers = signal<Provider[]>([]);
 
   constructor(
     public route: ActivatedRoute,
     public servicePrestataires: ProviderService
-  ) {
-    this.prestataires = servicePrestataires.getPrestataires();
-  }
+  ) {}
 
   ngOnInit() {
     this.route.queryParamMap.subscribe((params) => {
-      this.search = params.get('search') || '';
+      this.search.set(params.get('search') || '');
+      this.servicePrestataires
+        .getPrestataires()
+        .subscribe((data) => this.providers.set(data));
     });
   }
 }

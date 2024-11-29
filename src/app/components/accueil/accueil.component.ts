@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { CategoryService } from '../../services/category.service';
@@ -12,10 +12,12 @@ import { Category } from '../../models/category';
   styleUrl: './accueil.component.css',
 })
 export class AccueilComponent {
-  public search: string = '';
-  public categories: Category[];
+  readonly search = signal<string>('');
+  readonly categories = signal<Category[]>([]);
 
   constructor(public categoryService: CategoryService) {
-    this.categories = categoryService.getCategories();
+    this.categoryService
+      .getCategories()
+      .subscribe((data) => this.categories.set(data));
   }
 }

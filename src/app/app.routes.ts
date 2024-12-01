@@ -12,6 +12,6 @@ export const routes: Routes = [
   { path: 'account', component: AccountComponent },
   { path: 'reservations', component: ReservationsComponent },
   { path: 'result', component: SearchResultsComponent },
-  { path: 'booking', component: BookingPageComponent },
+  { path: 'booking/:id', component: BookingPageComponent },
   { path: '**', component: AccueilComponent },
 ];

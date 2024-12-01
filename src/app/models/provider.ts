@@ -1,4 +1,5 @@
 export class Provider {
+  id: number = 0;
   name: string = '';
   surname: string = '';
   note: number = 3;

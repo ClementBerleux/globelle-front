@@ -1,6 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Provider } from '../../models/provider';
 import { ProviderService } from '../../services/provider.service';
 
@@ -17,6 +17,7 @@ export class SearchResultsComponent {
 
   constructor(
     public route: ActivatedRoute,
+    public router: Router,
     public servicePrestataires: ProviderService
   ) { }
 

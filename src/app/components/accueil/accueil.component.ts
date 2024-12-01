@@ -1,6 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CategoryService } from '../../services/category.service';
 import { Category } from '../../models/category';
 
@@ -15,7 +15,7 @@ export class AccueilComponent {
   readonly search = signal<string>('');
   readonly categories = signal<Category[]>([]);
 
-  constructor(public categoryService: CategoryService) {
+  constructor(public categoryService: CategoryService, public router: Router) {
     this.categoryService
       .getCategories()
       .subscribe((data) => this.categories.set(data));

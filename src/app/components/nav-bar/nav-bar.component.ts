@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
+import { User } from '../../models/user';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -8,4 +11,11 @@ import { RouterLink } from '@angular/router';
   templateUrl: './nav-bar.component.html',
   styleUrl: './nav-bar.component.css',
 })
-export class NavBarComponent {}
+export class NavBarComponent {
+
+  readonly userName = signal<string>('');
+
+  constructor(public serviceAuth: AuthService, public serviceUser: UserService) {
+    this.serviceUser.getClient(1).subscribe((data) => this.userName.set(data.name + ' ' + data.surname));
+  }
+}

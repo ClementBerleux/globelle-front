@@ -1,23 +1,25 @@
 import { Component, signal } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { Provider } from '../../models/provider';
 import { ProviderService } from '../../services/provider.service';
+import { Provider } from '../../models/provider';
+import { FormsModule } from '@angular/forms';
+import { Location } from '@angular/common';
 
 @Component({
-  selector: 'app-search-results',
+  selector: 'app-reservations',
   standalone: true,
-  imports: [RouterLink, FormsModule],
-  templateUrl: './search-results.component.html',
-  styleUrl: './search-results.component.css',
+  imports: [FormsModule],
+  templateUrl: './reservations.component.html',
+  styleUrl: './reservations.component.css'
 })
-export class SearchResultsComponent {
+export class ReservationsComponent {
   readonly search = signal<string>('');
   readonly providers = signal<Provider[]>([]);
 
   constructor(
     public route: ActivatedRoute,
-    public servicePrestataires: ProviderService
+    public servicePrestataires: ProviderService,
+    public location: Location
   ) { }
 
   ngOnInit() {

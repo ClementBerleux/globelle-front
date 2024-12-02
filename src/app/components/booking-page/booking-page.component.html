@@ -1,9 +1,16 @@
 <div class="flex flex-col justify-center items-center mt-20 mb-8 gap-8">
   <div
-    class="bg-white flex flex-col mx-4 border rounded-xl shadow-sm dark:bg-neutral-900 dark:border-neutral-700 dark:shadow-neutral-700/70">
+    class="bg-white flex flex-col mx-4 border rounded-xl shadow-sm dark:bg-neutral-900 dark:border-neutral-700 dark:shadow-neutral-700/70"
+  >
     <div class="sm:flex border-b">
-      <div class="shrink-0 w-full rounded-t-xl overflow-hidden sm:rounded-ss-xl sm:rounded-se-none sm:max-w-44">
-        <img class="size-full top-0 start-0 object-cover" src="images/categories/manucure.webp" alt="Card Image" />
+      <div
+        class="shrink-0 w-full rounded-t-xl overflow-hidden sm:rounded-ss-xl sm:rounded-se-none sm:max-w-44"
+      >
+        <img
+          class="size-full top-0 start-0 object-cover"
+          src="images/categories/manucure.webp"
+          alt="Card Image"
+        />
       </div>
       <div class="flex flex-wrap w-full">
         <div class="p-4 flex flex-col h-full w-full sm:p-4">
@@ -11,75 +18,117 @@
             <h3 class="text-lg font-bold text-gray-800 dark:text-white">
               {{ provider().name }} {{ provider().surname }}
             </h3>
-            <svg class="w-6 h-6 cursor-vernis" [class]="
+            <svg
+              class="w-6 h-6 cursor-vernis"
+              [class]="
                 provider().isFavorite
                   ? 'dark:text-white text-pink-600 fill-pink-100'
-                  : 'text-gray-800 dark:text-white hover:text-pink-600 hover:fill-pink-100'"
-              (click)="provider().isFavorite = !provider().isFavorite" aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z" />
+                  : 'text-gray-800 dark:text-white hover:text-pink-600 hover:fill-pink-100'
+              "
+              (click)="provider().isFavorite = !provider().isFavorite"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"
+              />
             </svg>
           </div>
           <div class="flex mt-2">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-              class="text-gray-500">
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              class="text-gray-500"
+            >
               <path
                 d="M8.85 17.825L12 15.925L15.15 17.85L14.325 14.25L17.1 11.85L13.45 11.525L12 8.125L10.55 11.5L6.9 11.825L9.675 14.25L8.85 17.825ZM5.825 22L7.45 14.975L2 10.25L9.2 9.625L12 3L14.8 9.625L22 10.25L16.55 14.975L18.175 22L12 18.275L5.825 22Z"
-                fill="currentColor" />
+                fill="currentColor"
+              />
             </svg>
             <p class="text-s text-gray-500 dark:text-neutral-500">
               {{ provider().note }}/5 - {{ provider().nb_opinions }} avis
             </p>
           </div>
           <div class="flex justify-center items-end gap-2 h-full mt-2">
-            <p class="px-2 text-white rounded-lg" [class]="
+            <p
+              class="px-2 text-white rounded-lg"
+              [class]="
                 provider().dispo[0] == '1'
                   ? 'bg-purple-500'
                   : 'bg-neutral-500 opacity-50'
-              ">
+              "
+            >
               Lun
             </p>
-            <p class="px-2 text-white rounded-lg" [class]="
+            <p
+              class="px-2 text-white rounded-lg"
+              [class]="
                 provider().dispo[1] == '1'
                   ? 'bg-purple-500'
                   : 'bg-neutral-500 opacity-50'
-              ">
+              "
+            >
               Mar
             </p>
-            <p class="px-2 text-white rounded-lg" [class]="
+            <p
+              class="px-2 text-white rounded-lg"
+              [class]="
                 provider().dispo[2] == '1'
                   ? 'bg-purple-500'
                   : 'bg-neutral-500 opacity-50'
-              ">
+              "
+            >
               Mer
             </p>
-            <p class="px-2 text-white rounded-lg" [class]="
+            <p
+              class="px-2 text-white rounded-lg"
+              [class]="
                 provider().dispo[3] == '1'
                   ? 'bg-purple-500'
                   : 'bg-neutral-500 opacity-50'
-              ">
+              "
+            >
               Jeu
             </p>
-            <p class="px-2 text-white rounded-lg" [class]="
+            <p
+              class="px-2 text-white rounded-lg"
+              [class]="
                 provider().dispo[4] == '1'
                   ? 'bg-purple-500'
                   : 'bg-neutral-500 opacity-50'
-              ">
+              "
+            >
               Ven
             </p>
-            <p class="px-2 text-white rounded-lg" [class]="
+            <p
+              class="px-2 text-white rounded-lg"
+              [class]="
                 provider().dispo[5] == '1'
                   ? 'bg-purple-500'
                   : 'bg-neutral-500 opacity-50'
-              ">
+              "
+            >
               Sam
             </p>
-            <p class="px-2 text-white rounded-lg" [class]="
+            <p
+              class="px-2 text-white rounded-lg"
+              [class]="
                 provider().dispo[6] == '1'
                   ? 'bg-purple-500'
                   : 'bg-neutral-500 opacity-50'
-              ">
+              "
+            >
               Dim
             </p>
           </div>
@@ -87,30 +136,48 @@
       </div>
     </div>
     <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
-      <div class="p-4 sm:mt-auto grid grid-cols-5 justify-center items-center gap-2 border-b">
+      <div class="p-4 sm:mt-auto border-b">
         @for (service of services(); track $index) {
-        <input type="radio" formControlName="service" name="service" [value]="service.name"
-          (ngModelChange)="inputChange(service.name + ' à ' + service.price + ' €')" />
-        <p class="col-span-3 text-lg font-semibold text-gray-800 dark:text-white">
-          {{ service.name }}
-        </p>
-        <p>{{service.price}} €</p>
+        <label class="grid grid-cols-5 justify-center items-center gap-2">
+          <input
+            type="radio"
+            formControlName="service"
+            name="service"
+            [value]="service.name"
+            (ngModelChange)="
+              inputChange(service.name + ' à ' + service.price + ' €')
+            "
+          />
+          <p
+            class="col-span-3 text-lg font-semibold text-gray-800 dark:text-white"
+          >
+            {{ service.name }}
+          </p>
+          <p>{{ service.price }} €</p>
+        </label>
         }
       </div>
       <div class="p-4 sm:mt-auto flex justify-center items-center border-b">
         <p class="font-semibold p-4">Choix du créneau :</p>
-        <input type="date" [min]="todayString"
-          class="px-4 py-2 bg-neutral-100 border border-gray-400 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-pink-500 caret-pink-500" />
+        <input
+          type="date"
+          [min]="todayString"
+          class="px-4 py-2 bg-neutral-100 border border-gray-400 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-pink-500 caret-pink-500"
+        />
       </div>
       <div class="grid grid-cols-2 items-center m-4 gap-4">
         <p class="text-right font-bold text-lg">Récapitulatif :</p>
         <p>{{ selection() }}</p>
-        <button (click)="location.back()"
-          class="px-8 py-2 cursor-vernis font-semibold border border-pink-300 hover:border-pink-600 rounded-xl">
+        <button
+          (click)="location.back()"
+          class="px-8 py-2 cursor-vernis font-semibold border border-pink-300 hover:border-pink-600 rounded-xl"
+        >
           Retour
         </button>
-        <button type="submit"
-          class="px-8 py-2 cursor-vernis font-semibold border border-pink-300 hover:text-white hover:bg-gradient-to-r hover:from-pink-500 hover:to-purple-500 rounded-xl">
+        <button
+          type="submit"
+          class="px-8 py-2 cursor-vernis font-semibold border border-pink-300 hover:text-white hover:bg-gradient-to-r hover:from-pink-500 hover:to-purple-500 rounded-xl"
+        >
           Réserver
         </button>
       </div>

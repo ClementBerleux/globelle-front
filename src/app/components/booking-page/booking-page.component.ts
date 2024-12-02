@@ -5,6 +5,7 @@ import { Service } from '../../models/service';
 import { Provider } from '../../models/provider';
 import { ActivatedRoute } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-booking-page',
@@ -15,23 +16,39 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 })
 export class BookingPageComponent {
   readonly services = signal<Service[]>([]);
-  readonly provider = signal<Provider>(new Provider);
-  readonly idProvider = signal(0)
-  readonly selection = signal('')
-  public today: Date = new Date(Date.now())
+  readonly provider = signal<Provider>(new Provider());
+  readonly idProvider = signal(0);
+  readonly selection = signal('');
+  public today: Date = new Date(Date.now());
   public todayString: string;
   public formGroup = new FormGroup({
-    service: new FormControl('', { nonNullable: true })
-  })
+    service: new FormControl('', { nonNullable: true }),
+  });
 
-  constructor(private route: ActivatedRoute, public location: Location, public providerService: ProviderService) {
-    this.todayString = this.today.getFullYear() + '-' + this.today.getMonth() + '-' + this.today.getDate()
+  constructor(
+    private route: ActivatedRoute,
+    public location: Location,
+    public providerService: ProviderService,
+    public authService: AuthService
+  ) {
+    this.todayString =
+      this.today.getFullYear() +
+      '-' +
+      this.today.getMonth() +
+      '-' +
+      this.today.getDate();
   }
 
   ngOnInit() {
-    this.route.paramMap.subscribe((params) => this.idProvider.set(Number(params.get('id'))))
-    this.providerService.getPrestataire(this.idProvider()).subscribe((data) => this.provider.set(data))
-    this.providerService.getServices(this.idProvider()).subscribe((data) => this.services.set(data));
+    this.route.paramMap.subscribe((params) =>
+      this.idProvider.set(Number(params.get('id')))
+    );
+    this.providerService
+      .getPrestataire(this.idProvider())
+      .subscribe((data) => this.provider.set(data));
+    this.providerService
+      .getServices(this.idProvider())
+      .subscribe((data) => this.services.set(data));
     // console.log('Date : ' + Date.now())
   }
 
@@ -40,6 +57,6 @@ export class BookingPageComponent {
   }
 
   inputChange(serviceName: string): void {
-    this.selection.set(serviceName)
+    this.selection.set(serviceName);
   }
 }

@@ -12,5 +12,5 @@ import { AuthService } from '../../services/auth.service';
 export class LoginComponent {
   public isProvider: boolean = false;
 
-  constructor(public serviceAuth: AuthService) { }
+  constructor(public serviceAuth: AuthService) {}
 }

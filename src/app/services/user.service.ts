@@ -17,4 +17,8 @@ export class UserService {
   getClient(id: number): Observable<User> {
     return this.http.get<User>(environment.BACKEND_URL + '/clients/' + id);
   }
+
+  delUser(id: number): Observable<any> {
+    return this.http.delete(environment.BACKEND_URL + '/clients/' + id);
+  }
 }

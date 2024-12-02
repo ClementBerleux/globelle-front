@@ -15,6 +15,7 @@
       (ngSubmit)="onSubmit()"
       class="grid gap-4 gap-y-2 text-sm grid-cols-1 sm:grid-cols-2 md:grid-cols-4"
     >
+      <input type="hidden" value="0" formControlName="id" />
       <div class="md:col-span-2">
         <label>
           Prénom
@@ -107,6 +108,7 @@
 
       @if (authService.isAuth()) {
       <button
+        (click)="delUser()"
         class="mt-2 py-2 w-full md:col-span-2 cursor-vernis font-semibold border border-pink-300 hover:border-pink-600 rounded-xl"
       >
         Supprimer votre compte

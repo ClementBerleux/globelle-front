@@ -19,6 +19,7 @@ import { AuthService } from '../../services/auth.service';
 export class AccountComponent {
   readonly user = signal<User>(new User());
   public accountForm = new FormGroup({
+    id: new FormControl(0, Validators.required),
     name: new FormControl('', Validators.required),
     surname: new FormControl('', Validators.required),
     email: new FormControl('', Validators.required),
@@ -33,13 +34,19 @@ export class AccountComponent {
     public authService: AuthService
   ) {
     if (authService.isAuth())
-      this.serviceUser.getClient(1).subscribe((data) => {
+      this.serviceUser.getClient(2).subscribe((data) => {
         this.user.set(data);
-        this.accountForm.setValue(data);
+        this.accountForm.patchValue(data);
       });
   }
 
   public onSubmit(): void {
-    console.log(this.accountForm.getRawValue());
+    console.log(this.accountForm.value);
+  }
+
+  public delUser(): void {
+    this.serviceUser
+      .delUser(this.accountForm.get('id')?.getRawValue())
+      .subscribe();
   }
 }

@@ -1,4 +1,4 @@
 export class Category {
   public categorieService: string = '';
-  //public image: string = '';
+  public urlImage: string = '';
 }

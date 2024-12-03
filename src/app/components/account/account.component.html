@@ -9,13 +9,13 @@
     }
 
     <div
-      class="grid gap-4 grid-cols-1"
+      class="grid gap-8 grid-cols-1 items-start"
       [class]="isProvider ? 'lg:grid-cols-3' : ''"
     >
       <form
         [formGroup]="accountForm"
         (ngSubmit)="onSubmit()"
-        class="grid gap-4 gap-y-2 grid-cols-2 sm:grid-cols-6"
+        class="grid gap-2 grid-cols-2 sm:grid-cols-6"
         [class]="isProvider ? 'lg:col-span-2' : ''"
       >
         <div class="relative sm:col-span-3">
@@ -134,7 +134,7 @@
         @if (authService.isAuth()) {
         <button
           (click)="delUser()"
-          class="mt-2 py-2 w-full col-span-2 sm:col-span-3 cursor-vernis font-semibold border border-pink-300 hover:border-pink-600 rounded-xl"
+          class="py-2 w-full col-span-2 sm:col-span-3 cursor-vernis text-neutral-600 border border-pink-300 hover:border-pink-500 rounded-xl"
         >
           Supprimer votre compte
         </button>
@@ -143,59 +143,98 @@
         <button
           [disabled]="accountForm.invalid"
           type="submit"
-          class="mt-2 py-2 w-full col-span-2 sm:col-start-5 sm:col-span-2 cursor-vernis font-semibold border border-pink-300 hover:text-white hover:bg-gradient-to-r hover:from-pink-500 hover:to-purple-500 rounded-xl disabled:opacity-20"
+          class="py-4 w-full col-span-2 sm:col-start-5 sm:col-span-2 cursor-vernis text-lg font-semibold border border-pink-300 hover:text-neutral-50 hover:bg-gradient-to-r hover:from-pink-500 hover:to-purple-500 rounded-xl disabled:opacity-20 hover:disabled:bg-none disabled:text-neutral-800 disabled:dark:text-neutral-200 disabled:cursor-not-allowed"
         >
           Valider
         </button>
       </form>
 
       @if(isProvider){
-
-      <form
-        [formGroup]="serviceForm"
-        (ngSubmit)="ajoutService()"
-        class="grid gap-4 gap-y-2 grid-cols-2 sm:grid-cols-4"
-      >
-        <div class="relative col-span-2">
-          <input
-            type="text"
-            name="serviceName"
-            id="hs-floating-input-serviceName"
-            class="peer p-4 block w-full bg-neutral-100 border-gray-200 rounded-xl focus:border-pink-500 focus:ring-pink-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-600 dark:focus:border-pink-600 dark:focus:ring-pink-600 focus:pt-6 focus:pb-2 [&:not(:placeholder-shown)]:pt-6 [&:not(:placeholder-shown)]:pb-2 autofill:pt-6 autofill:pb-2"
-            placeholder=""
-            formControlName="serviceName"
-          />
-          <label
-            for="hs-floating-input-serviceName"
-            class="absolute top-0 start-0 p-4 h-full truncate pointer-events-none transition ease-in-out duration-100 border border-transparent origin-[0_0] peer-disabled:opacity-50 peer-disabled:pointer-events-none peer-focus:scale-90 peer-focus:translate-x-0.5 peer-focus:-translate-y-1.5 peer-focus:text-neutral-700 dark:peer-focus:text-neutral-300 peer-[:not(:placeholder-shown)]:scale-90 peer-[:not(:placeholder-shown)]:translate-x-0.5 peer-[:not(:placeholder-shown)]:-translate-y-1.5 peer-[:not(:placeholder-shown)]:text-neutral-400 dark:peer-[:not(:placeholder-shown)]:text-neutral-500"
-            >Ajouter un service</label
-          >
-        </div>
-
-        <div class="relative">
-          <input
-            type="number"
-            name="servicePrice"
-            id="hs-floating-input-servicePrice"
-            class="peer p-4 block w-full bg-neutral-100 border-gray-200 rounded-xl focus:border-pink-500 focus:ring-pink-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-600 dark:focus:border-pink-600 dark:focus:ring-pink-600 focus:pt-6 focus:pb-2 [&:not(:placeholder-shown)]:pt-6 [&:not(:placeholder-shown)]:pb-2 autofill:pt-6 autofill:pb-2"
-            placeholder=""
-            formControlName="servicePrice"
-          />
-          <label
-            for="hs-floating-input-servicePrice"
-            class="absolute top-0 start-0 p-4 h-full truncate pointer-events-none transition ease-in-out duration-100 border border-transparent origin-[0_0] peer-disabled:opacity-50 peer-disabled:pointer-events-none peer-focus:scale-90 peer-focus:translate-x-0.5 peer-focus:-translate-y-1.5 peer-focus:text-neutral-700 dark:peer-focus:text-neutral-300 peer-[:not(:placeholder-shown)]:scale-90 peer-[:not(:placeholder-shown)]:translate-x-0.5 peer-[:not(:placeholder-shown)]:-translate-y-1.5 peer-[:not(:placeholder-shown)]:text-neutral-400 dark:peer-[:not(:placeholder-shown)]:text-neutral-500"
-            >Prix</label
-          >
-        </div>
-
-        <button
-          type="submit"
-          [disabled]="serviceForm.invalid"
-          class="py-2 w-full cursor-vernis font-semibold border border-pink-300 hover:text-white hover:bg-gradient-to-r hover:from-pink-500 hover:to-purple-500 rounded-xl disabled:opacity-20"
+      <div>
+        <form
+          [formGroup]="serviceForm"
+          (ngSubmit)="ajoutService()"
+          class="grid gap-4 gap-y-2 grid-cols-2 sm:grid-cols-4 lg:grid-cols-2"
         >
-          Ajouter
-        </button>
-      </form>
+          <div class="relative col-span-2">
+            <input
+              type="text"
+              name="serviceName"
+              id="hs-floating-input-serviceName"
+              class="peer p-4 block w-full bg-neutral-100 border-gray-200 rounded-xl focus:border-pink-500 focus:ring-pink-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-600 dark:focus:border-pink-600 dark:focus:ring-pink-600 focus:pt-6 focus:pb-2 [&:not(:placeholder-shown)]:pt-6 [&:not(:placeholder-shown)]:pb-2 autofill:pt-6 autofill:pb-2"
+              placeholder=""
+              formControlName="serviceName"
+            />
+            <label
+              for="hs-floating-input-serviceName"
+              class="absolute top-0 start-0 p-4 h-full truncate pointer-events-none transition ease-in-out duration-100 border border-transparent origin-[0_0] peer-disabled:opacity-50 peer-disabled:pointer-events-none peer-focus:scale-90 peer-focus:translate-x-0.5 peer-focus:-translate-y-1.5 peer-focus:text-neutral-700 dark:peer-focus:text-neutral-300 peer-[:not(:placeholder-shown)]:scale-90 peer-[:not(:placeholder-shown)]:translate-x-0.5 peer-[:not(:placeholder-shown)]:-translate-y-1.5 peer-[:not(:placeholder-shown)]:text-neutral-400 dark:peer-[:not(:placeholder-shown)]:text-neutral-500"
+              >Ajouter un service</label
+            >
+          </div>
+
+          <div class="relative">
+            <input
+              type="number"
+              name="servicePrice"
+              id="hs-floating-input-servicePrice"
+              class="peer p-4 block w-full bg-neutral-100 border-gray-200 rounded-xl focus:border-pink-500 focus:ring-pink-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-600 dark:focus:border-pink-600 dark:focus:ring-pink-600 focus:pt-6 focus:pb-2 [&:not(:placeholder-shown)]:pt-6 [&:not(:placeholder-shown)]:pb-2 autofill:pt-6 autofill:pb-2"
+              placeholder=""
+              formControlName="servicePrice"
+            />
+            <label
+              for="hs-floating-input-servicePrice"
+              class="absolute top-0 start-0 p-4 h-full truncate pointer-events-none transition ease-in-out duration-100 border border-transparent origin-[0_0] peer-disabled:opacity-50 peer-disabled:pointer-events-none peer-focus:scale-90 peer-focus:translate-x-0.5 peer-focus:-translate-y-1.5 peer-focus:text-neutral-700 dark:peer-focus:text-neutral-300 peer-[:not(:placeholder-shown)]:scale-90 peer-[:not(:placeholder-shown)]:translate-x-0.5 peer-[:not(:placeholder-shown)]:-translate-y-1.5 peer-[:not(:placeholder-shown)]:text-neutral-400 dark:peer-[:not(:placeholder-shown)]:text-neutral-500"
+              >Prix</label
+            >
+          </div>
+
+          <button
+            type="submit"
+            [disabled]="serviceForm.invalid"
+            class="w-full cursor-vernis text-lg font-semibold border border-pink-300 hover:text-neutral-50 hover:bg-gradient-to-r hover:from-pink-500 hover:to-purple-500 rounded-xl disabled:opacity-20 hover:disabled:bg-none disabled:text-neutral-800 disabled:dark:text-neutral-200 disabled:cursor-not-allowed"
+          >
+            Ajouter
+          </button>
+        </form>
+
+        <p class="my-4 text-center font-bold text-red-600">
+          Afficher les services
+        </p>
+
+        <form
+          [formGroup]="languageForm"
+          (ngSubmit)="ajoutLanguage()"
+          class="grid gap-4 gap-y-2 grid-cols-3"
+        >
+          <div class="relative col-span-2">
+            <input
+              type="text"
+              name="languageName"
+              id="hs-floating-input-languageName"
+              class="peer p-4 block w-full bg-neutral-100 border-gray-200 rounded-xl focus:border-pink-500 focus:ring-pink-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-600 dark:focus:border-pink-600 dark:focus:ring-pink-600 focus:pt-6 focus:pb-2 [&:not(:placeholder-shown)]:pt-6 [&:not(:placeholder-shown)]:pb-2 autofill:pt-6 autofill:pb-2"
+              placeholder=""
+              formControlName="languageName"
+            />
+            <label
+              for="hs-floating-input-languageName"
+              class="absolute top-0 start-0 p-4 h-full truncate pointer-events-none transition ease-in-out duration-100 border border-transparent origin-[0_0] peer-disabled:opacity-50 peer-disabled:pointer-events-none peer-focus:scale-90 peer-focus:translate-x-0.5 peer-focus:-translate-y-1.5 peer-focus:text-neutral-700 dark:peer-focus:text-neutral-300 peer-[:not(:placeholder-shown)]:scale-90 peer-[:not(:placeholder-shown)]:translate-x-0.5 peer-[:not(:placeholder-shown)]:-translate-y-1.5 peer-[:not(:placeholder-shown)]:text-neutral-400 dark:peer-[:not(:placeholder-shown)]:text-neutral-500"
+              >Ajouter une langue</label
+            >
+          </div>
+
+          <button
+            type="submit"
+            [disabled]="languageForm.invalid"
+            class="w-full cursor-vernis text-lg font-semibold border border-pink-300 hover:text-neutral-50 hover:bg-gradient-to-r hover:from-pink-500 hover:to-purple-500 rounded-xl disabled:opacity-20 hover:disabled:bg-none disabled:text-neutral-800 disabled:dark:text-neutral-200 disabled:cursor-not-allowed"
+          >
+            Ajouter
+          </button>
+        </form>
+
+        <p class="my-4 text-center font-bold text-red-600">
+          Afficher les langues
+        </p>
+      </div>
       }
     </div>
   </div>

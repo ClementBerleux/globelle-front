@@ -3,7 +3,6 @@ import { UserService } from '../../services/user.service';
 import {
   FormControl,
   FormGroup,
-  FormsModule,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
@@ -13,7 +12,7 @@ import { AuthService } from '../../services/auth.service';
 @Component({
   selector: 'app-account',
   standalone: true,
-  imports: [ReactiveFormsModule, FormsModule],
+  imports: [ReactiveFormsModule],
   templateUrl: './account.component.html',
   styleUrl: './account.component.css',
 })
@@ -31,6 +30,9 @@ export class AccountComponent {
   public serviceForm = new FormGroup({
     serviceName: new FormControl('', Validators.required),
     servicePrice: new FormControl(undefined, Validators.required),
+  });
+  public languageForm = new FormGroup({
+    languageName: new FormControl('', Validators.required),
   });
   public isProvider: boolean = true;
 
@@ -54,4 +56,6 @@ export class AccountComponent {
   }
 
   public ajoutService(): void {}
+
+  public ajoutLanguage(): void {}
 }

@@ -12,9 +12,13 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  login(credentials: User): Observable<any> {
+  login(email: string, motDePasse: string): Observable<any> {
+    console.log('credential');
     return this.http
-      .post<{ accessToken: string }>(`${this.apiUrl}/login`, credentials)
+      .post<{ accessToken: string }>(`${this.apiUrl}/login`, {
+        email: email,
+        password: motDePasse,
+      })
       .pipe(
         tap((response: { accessToken: string }) => {
           localStorage.setItem('token', response.accessToken); // Store the token
@@ -23,8 +27,15 @@ export class AuthService {
   }
 
   register(user: User): Observable<any> {
-    return this.http.post(`${this.apiUrl}/register`, user); // Endpoint for registration
+    console.log('Register !!!');
+    console.log(user);
+    return this.http.post(`${this.apiUrl}/register/2`, {
+      username: 'toto',
+      email: 'toto@toto.fr',
+      password: 'toto',
+    }); // Endpoint for registration
   }
+
   getUserRoles(): string[] {
     // Get token from localStorage
     const token = localStorage.getItem('token');

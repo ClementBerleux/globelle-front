@@ -12,10 +12,16 @@ import { UserService } from '../../services/user.service';
   styleUrl: './nav-bar.component.css',
 })
 export class NavBarComponent {
-
   readonly userName = signal<string>('');
 
-  constructor(public serviceAuth: AuthService, public serviceUser: UserService) {
-    this.serviceUser.getClient(1).subscribe((data) => this.userName.set(data.name + ' ' + data.surname));
+  constructor(
+    public serviceAuth: AuthService,
+    public serviceUser: UserService
+  ) {
+    this.serviceUser
+      .getClient(3)
+      .subscribe((data) =>
+        this.userName.set(data.firstname + ' ' + data.lastname)
+      );
   }
 }

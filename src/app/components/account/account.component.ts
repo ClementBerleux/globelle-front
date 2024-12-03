@@ -43,15 +43,24 @@ export class AccountComponent {
     public serviceUser: UserService,
     public authService: AuthService
   ) {
-    if (authService.isAuth())
-      this.serviceUser.getClient(2).subscribe((data) => {
+    if (authService.isAuthenticated())
+      this.serviceUser.getClient(3).subscribe((data) => {
         this.user.set(data);
         this.accountForm.patchValue(data);
       });
   }
 
   public onSubmit(): void {
-    console.log(this.accountForm.value);
+    if (this.authService.isAuthenticated()) {
+      // this.serviceUser.updateUser(this.user().id).subscribe();
+    } else {
+      let user = new User();
+      user.firstname = this.accountForm.value.firstname || '';
+      user.lastname = this.accountForm.value.lastname || '';
+      console.log('User à ajouter : ');
+      console.log(user);
+      this.authService.register(user).subscribe();
+    }
   }
 
   public delUser(): void {

@@ -1,9 +1,9 @@
 import { Component, signal } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
-import { ProviderService } from '../../services/provider.service';
+import { ActivatedRoute } from '@angular/router';
 import { Provider } from '../../models/provider';
 import { FormsModule } from '@angular/forms';
 import { Location } from '@angular/common';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-reservations',
@@ -18,15 +18,15 @@ export class ReservationsComponent {
 
   constructor(
     public route: ActivatedRoute,
-    public servicePrestataires: ProviderService,
+    public userService: UserService,
     public location: Location
   ) { }
 
   ngOnInit() {
     this.route.queryParamMap.subscribe((params) => {
       this.search.set(params.get('search') || '');
-      this.servicePrestataires
-        .getPrestataires()
+      this.userService
+        .getProviders()
         .subscribe((data) => this.providers.set(data));
     });
   }

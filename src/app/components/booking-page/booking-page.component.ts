@@ -1,16 +1,16 @@
 import { Component, signal } from '@angular/core';
 import { Location } from '@angular/common';
-import { ProviderService } from '../../services/provider.service';
 import { Service } from '../../models/service';
 import { Provider } from '../../models/provider';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-booking-page',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './booking-page.component.html',
   styleUrl: './booking-page.component.css',
 })
@@ -28,7 +28,7 @@ export class BookingPageComponent {
   constructor(
     private route: ActivatedRoute,
     public location: Location,
-    public providerService: ProviderService,
+    public userService: UserService,
     public authService: AuthService
   ) {
     this.todayString =
@@ -43,10 +43,10 @@ export class BookingPageComponent {
     this.route.paramMap.subscribe((params) =>
       this.idProvider.set(Number(params.get('id')))
     );
-    this.providerService
-      .getPrestataire(this.idProvider())
+    this.userService
+      .getProvider(this.idProvider())
       .subscribe((data) => this.provider.set(data));
-    this.providerService
+    this.userService
       .getServices(this.idProvider())
       .subscribe((data) => this.services.set(data));
     // console.log('Date : ' + Date.now())

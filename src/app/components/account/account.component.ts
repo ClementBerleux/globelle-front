@@ -9,6 +9,8 @@ import {
 import { User } from '../../models/user';
 import { AuthService } from '../../services/auth.service';
 import { Provider } from '../../models/provider';
+import { UserToken } from '../../models/user-token';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-account',
@@ -18,16 +20,17 @@ import { Provider } from '../../models/provider';
   styleUrl: './account.component.css',
 })
 export class AccountComponent {
-  readonly user = signal<User>(new User());
-  readonly provider = signal<Provider>(new Provider());
+  readonly userToken = signal<UserToken>(new UserToken);
+  readonly provider = signal<Provider>(new Provider);
   public accountForm = new FormGroup({
     firstname: new FormControl('', Validators.required),
     lastname: new FormControl('', Validators.required),
     email: new FormControl('', Validators.required),
-    telephone: new FormControl('', Validators.required),
+    password: new FormControl('', Validators.required),
     address: new FormControl('', Validators.required),
-    city: new FormControl('', Validators.required),
     postalCode: new FormControl('', Validators.required),
+    city: new FormControl('', Validators.required),
+    telephone: new FormControl('', Validators.required),
   });
   public serviceForm = new FormGroup({
     serviceName: new FormControl('', Validators.required),
@@ -40,31 +43,44 @@ export class AccountComponent {
   public disponibilites = signal('0000000');
 
   constructor(
-    public serviceUser: UserService,
+    public router: Router,
+    public userService: UserService,
     public authService: AuthService
   ) {
-    if (authService.isAuthenticated())
-      this.serviceUser.getClient(3).subscribe((data) => {
-        this.user.set(data);
+  }
+
+  ngOnInit(){
+    this.userToken.set(this.authService.getUserToken())
+    if (this.authService.isAuthenticated())
+      this.userService.getClient(this.userToken().id).subscribe((data) => {
         this.accountForm.patchValue(data);
+        this.accountForm.patchValue({password: '****'})
       });
   }
 
   public onSubmit(): void {
+    let user = new User();
+    user.firstname = this.accountForm.value.firstname || '';
+    user.lastname = this.accountForm.value.lastname || '';
+    user.username = user.firstname[0] + user.lastname;
+    user.username = user.username.trim().toLowerCase();
+    user.email = this.accountForm.value.email || '';
+    user.address = this.accountForm.value.address || '';
+    user.postalCode = this.accountForm.value.postalCode || '';
+    user.city = this.accountForm.value.city || '';
+    user.telephone = this.accountForm.value.telephone || '';
+
     if (this.authService.isAuthenticated()) {
-      // this.serviceUser.updateUser(this.user().id).subscribe();
+      user.password = null;
+      this.userService.updateUser(this.userToken().id, user).subscribe();
     } else {
-      let user = new User();
-      user.firstname = this.accountForm.value.firstname || '';
-      user.lastname = this.accountForm.value.lastname || '';
-      console.log('User à ajouter : ');
-      console.log(user);
-      this.authService.register(user).subscribe();
+      user.password = this.accountForm.value.password || '';
+      this.authService.register(user, false).subscribe(() => this.router.navigate(['/login']));
     }
   }
 
   public delUser(): void {
-    this.serviceUser.delUser(this.user().id).subscribe();
+    this.userService.delUser(this.userToken().id).subscribe();
   }
 
   public ajoutService(): void {}

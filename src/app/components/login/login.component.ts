@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { FormsModule } from '@angular/forms';
 import { User } from '../../models/user';
@@ -16,12 +16,12 @@ export class LoginComponent {
   public email: string = '';
   public motDePasse: string = '';
 
-  constructor(public authService: AuthService) {}
+  constructor(public router: Router, public authService: AuthService) {}
 
   public connect(): void {
     // let user = new User;
     // user.email = this.email
     // user.pa = this.email
-    this.authService.login(this.email, this.motDePasse).subscribe();
+    this.authService.login(this.email, this.motDePasse).subscribe(() => this.router.navigate(['']));
   }
 }

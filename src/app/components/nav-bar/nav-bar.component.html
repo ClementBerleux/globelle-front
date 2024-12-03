@@ -6,8 +6,8 @@
     GloBelle
   </h1>
   <div class="flex flex-col sm:flex-row items-center sm:gap-4">
-    @if(serviceAuth.isAuthenticated()){
-    <p>Bienvenue {{ userName() }} !</p>
+    @if(authService.isAuthenticated()){
+    <p>Bienvenue {{ authService.getUserToken().firstname }} !</p>
     <p
       routerLink="/reservations"
       class="cursor-vernis hover:bg-neutral-100 dark:hover:bg-neutral-700 rounded-lg p-2"
@@ -21,7 +21,7 @@
       Mon compte
     </p>
     <div
-      (click)="serviceAuth.logout()"
+      (click)="authService.logout()"
       class="flex flex-col justify-center items-center p-2 cursor-vernis hover:bg-neutral-100 dark:hover:bg-neutral-700 rounded-lg"
     >
       <svg

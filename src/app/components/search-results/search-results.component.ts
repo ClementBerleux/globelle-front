@@ -2,7 +2,7 @@ import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Provider } from '../../models/provider';
-import { ProviderService } from '../../services/provider.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-search-results',
@@ -18,14 +18,14 @@ export class SearchResultsComponent {
   constructor(
     public route: ActivatedRoute,
     public router: Router,
-    public servicePrestataires: ProviderService
+    public userService: UserService
   ) { }
 
   ngOnInit() {
     this.route.queryParamMap.subscribe((params) => {
       this.search.set(params.get('search') || '');
-      this.servicePrestataires
-        .getPrestataires()
+      this.userService
+        .getProviders()
         .subscribe((data) => this.providers.set(data));
     });
   }

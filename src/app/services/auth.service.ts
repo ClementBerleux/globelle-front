@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { User } from '../models/user';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
+import { UserToken } from '../models/user-token';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +14,6 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   login(email: string, motDePasse: string): Observable<any> {
-    console.log('credential');
     return this.http
       .post<{ accessToken: string }>(`${this.apiUrl}/login`, {
         email: email,
@@ -26,31 +26,33 @@ export class AuthService {
       );
   }
 
-  register(user: User): Observable<any> {
-    console.log('Register !!!');
-    console.log(user);
-    return this.http.post(`${this.apiUrl}/register/2`, {
-      username: 'toto',
-      email: 'toto@toto.fr',
-      password: 'toto',
-    }); // Endpoint for registration
+  register(user: User, roleProvider:boolean): Observable<any> {
+    if(roleProvider) return this.http.post(`${this.apiUrl}/register/1`, user);
+    else return this.http.post(`${this.apiUrl}/register/2`, user);
   }
 
-  getUserRoles(): string[] {
+  getUserToken(): UserToken {
     // Get token from localStorage
     const token = localStorage.getItem('token');
     if (!token) {
-      return [];
+      return new UserToken;
     }
 
     try {
       // Decode the JWT token
       const tokenPayload = JSON.parse(atob(token.split('.')[1]));
+      // console.info(tokenPayload)
       // Return roles from token payload, or empty array if no roles found
-      return tokenPayload.roles || [];
+      const userToken:UserToken = new UserToken;
+      userToken.id = tokenPayload.id || 0;
+      userToken.username = tokenPayload.username || '';
+      userToken.firstname = tokenPayload.firstname || '';
+      userToken.lastname = tokenPayload.lastname || '';
+      userToken.role = tokenPayload.role || '';
+      return userToken;
     } catch (error) {
       console.error('Error decoding token:', error);
-      return [];
+      return new UserToken;
     }
   }
 

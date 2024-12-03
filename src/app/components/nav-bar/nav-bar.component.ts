@@ -3,6 +3,7 @@ import { RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { User } from '../../models/user';
 import { UserService } from '../../services/user.service';
+import { UserToken } from '../../models/user-token';
 
 @Component({
   selector: 'app-nav-bar',
@@ -12,16 +13,15 @@ import { UserService } from '../../services/user.service';
   styleUrl: './nav-bar.component.css',
 })
 export class NavBarComponent {
-  readonly userName = signal<string>('');
+  readonly userToken = signal<UserToken>(new UserToken);
 
   constructor(
-    public serviceAuth: AuthService,
-    public serviceUser: UserService
+    public authService: AuthService,
+    public userService: UserService
   ) {
-    this.serviceUser
-      .getClient(3)
-      .subscribe((data) =>
-        this.userName.set(data.firstname + ' ' + data.lastname)
-      );
+  }
+
+  ngOnInit(){
+    this.userToken.set(this.authService.getUserToken())
   }
 }

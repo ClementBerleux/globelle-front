@@ -4,6 +4,7 @@ export class User {
   lastname: string = '';
   username: string = '';
   email: string = '';
+  password: string | null = null;
   postalCode: string = '';
   city: string = '';
   address: string = '';

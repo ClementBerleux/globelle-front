@@ -1,127 +1,202 @@
 <div class="p-6 flex items-center justify-center">
   <div
-    class="container max-w-screen-lg bg-white rounded-xl shadow-lg py-2 px-4 md:p-4 mb-6"
+    class="bg-neutral-50 text-neutral-800 dark:bg-neutral-700 dark:text-neutral-200 rounded-xl shadow-lg py-2 px-4 md:p-4 mb-6"
   >
     @if(authService.isAuth()){
-    <h2 class="text-center font-semibold text-xl text-gray-600">
-      Modification
-    </h2>
+    <h2 class="text-center font-semibold text-xl">Modification</h2>
     }@else {
-    <h2 class="text-center font-semibold text-xl text-gray-600">Inscription</h2>
+    <h2 class="mb-4 text-center font-semibold text-xl">Inscription</h2>
     }
 
-    <form
-      [formGroup]="accountForm"
-      (ngSubmit)="onSubmit()"
-      class="grid gap-4 gap-y-2 text-sm grid-cols-1 sm:grid-cols-2 md:grid-cols-4"
+    <div
+      class="grid gap-4 grid-cols-1"
+      [class]="isProvider ? 'lg:grid-cols-3' : ''"
     >
-      <input type="hidden" value="0" formControlName="id" />
-      <div class="md:col-span-2">
-        <label>
-          Prénom
+      <form
+        [formGroup]="accountForm"
+        (ngSubmit)="onSubmit()"
+        class="grid gap-4 gap-y-2 grid-cols-2 sm:grid-cols-6"
+        [class]="isProvider ? 'lg:col-span-2' : ''"
+      >
+        <div class="relative sm:col-span-3">
           <input
             type="text"
-            name="name"
-            class="mt-1 px-4 py-2 w-full bg-neutral-100 border border-gray-400 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-pink-500 caret-pink-500"
-            formControlName="name"
+            name="firstname"
+            id="hs-floating-input-firstname"
+            class="peer p-4 block w-full bg-neutral-100 border-gray-200 rounded-xl focus:border-pink-500 focus:ring-pink-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-600 dark:focus:border-pink-600 dark:focus:ring-pink-600 focus:pt-6 focus:pb-2 [&:not(:placeholder-shown)]:pt-6 [&:not(:placeholder-shown)]:pb-2 autofill:pt-6 autofill:pb-2"
+            placeholder=""
+            formControlName="firstname"
           />
-        </label>
-      </div>
+          <label
+            for="hs-floating-input-firstname"
+            class="absolute top-0 start-0 p-4 h-full truncate pointer-events-none transition ease-in-out duration-100 border border-transparent origin-[0_0] peer-disabled:opacity-50 peer-disabled:pointer-events-none peer-focus:scale-90 peer-focus:translate-x-0.5 peer-focus:-translate-y-1.5 peer-focus:text-neutral-700 dark:peer-focus:text-neutral-300 peer-[:not(:placeholder-shown)]:scale-90 peer-[:not(:placeholder-shown)]:translate-x-0.5 peer-[:not(:placeholder-shown)]:-translate-y-1.5 peer-[:not(:placeholder-shown)]:text-neutral-400 dark:peer-[:not(:placeholder-shown)]:text-neutral-500"
+            >Prénom</label
+          >
+        </div>
 
-      <div class="md:col-span-2">
-        <label>
-          Nom
+        <div class="relative sm:col-span-3">
           <input
             type="text"
-            name="surname"
-            class="mt-1 px-4 py-2 w-full bg-neutral-100 border border-gray-400 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-pink-500 caret-pink-500"
-            formControlName="surname"
+            name="lastname"
+            id="hs-floating-input-lastname"
+            class="peer p-4 block w-full bg-neutral-100 border-gray-200 rounded-xl focus:border-pink-500 focus:ring-pink-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-600 dark:focus:border-pink-600 dark:focus:ring-pink-600 focus:pt-6 focus:pb-2 [&:not(:placeholder-shown)]:pt-6 [&:not(:placeholder-shown)]:pb-2 autofill:pt-6 autofill:pb-2"
+            placeholder=""
+            formControlName="lastname"
           />
-        </label>
-      </div>
+          <label
+            for="hs-floating-input-lastname"
+            class="absolute top-0 start-0 p-4 h-full truncate pointer-events-none transition ease-in-out duration-100 border border-transparent origin-[0_0] peer-disabled:opacity-50 peer-disabled:pointer-events-none peer-focus:scale-90 peer-focus:translate-x-0.5 peer-focus:-translate-y-1.5 peer-focus:text-neutral-700 dark:peer-focus:text-neutral-300 peer-[:not(:placeholder-shown)]:scale-90 peer-[:not(:placeholder-shown)]:translate-x-0.5 peer-[:not(:placeholder-shown)]:-translate-y-1.5 peer-[:not(:placeholder-shown)]:text-neutral-400 dark:peer-[:not(:placeholder-shown)]:text-neutral-500"
+            >Nom</label
+          >
+        </div>
 
-      <div class="md:col-span-3">
-        <label
-          >Email
+        <div class="relative col-span-2 sm:col-span-4">
           <input
             type="text"
             name="email"
-            class="mt-1 px-4 py-2 w-full bg-neutral-100 border border-gray-400 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-pink-500 caret-pink-500"
+            id="hs-floating-input-email"
+            class="peer p-4 block w-full bg-neutral-100 border-gray-200 rounded-xl focus:border-pink-500 focus:ring-pink-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-600 dark:focus:border-pink-600 dark:focus:ring-pink-600 focus:pt-6 focus:pb-2 [&:not(:placeholder-shown)]:pt-6 [&:not(:placeholder-shown)]:pb-2 autofill:pt-6 autofill:pb-2"
+            placeholder=""
             formControlName="email"
-            placeholder="email@domain.com"
           />
-        </label>
-      </div>
+          <label
+            for="hs-floating-input-email"
+            class="absolute top-0 start-0 p-4 h-full truncate pointer-events-none transition ease-in-out duration-100 border border-transparent origin-[0_0] peer-disabled:opacity-50 peer-disabled:pointer-events-none peer-focus:scale-90 peer-focus:translate-x-0.5 peer-focus:-translate-y-1.5 peer-focus:text-neutral-700 dark:peer-focus:text-neutral-300 peer-[:not(:placeholder-shown)]:scale-90 peer-[:not(:placeholder-shown)]:translate-x-0.5 peer-[:not(:placeholder-shown)]:-translate-y-1.5 peer-[:not(:placeholder-shown)]:text-neutral-400 dark:peer-[:not(:placeholder-shown)]:text-neutral-500"
+            >Email</label
+          >
+        </div>
 
-      <div class="md:col-span-1">
-        <label>
-          Téléphone
-          <!-- <span class="validity"></span> -->
+        <div class="relative col-span-2 sm:col-span-2">
           <input
             type="tel"
             name="telephone"
-            class="mt-1 px-4 py-2 w-full bg-neutral-100 border border-gray-400 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-pink-500 caret-pink-500"
+            id="hs-floating-input-telephone"
+            class="peer p-4 block w-full bg-neutral-100 border-gray-200 rounded-xl focus:border-pink-500 focus:ring-pink-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-600 dark:focus:border-pink-600 dark:focus:ring-pink-600 focus:pt-6 focus:pb-2 [&:not(:placeholder-shown)]:pt-6 [&:not(:placeholder-shown)]:pb-2 autofill:pt-6 autofill:pb-2"
+            placeholder=""
             formControlName="telephone"
             pattern="0[0-9]{9}"
           />
-        </label>
-      </div>
+          <label
+            for="hs-floating-input-telephone"
+            class="absolute top-0 start-0 p-4 h-full truncate pointer-events-none transition ease-in-out duration-100 border border-transparent origin-[0_0] peer-disabled:opacity-50 peer-disabled:pointer-events-none peer-focus:scale-90 peer-focus:translate-x-0.5 peer-focus:-translate-y-1.5 peer-focus:text-neutral-700 dark:peer-focus:text-neutral-300 peer-[:not(:placeholder-shown)]:scale-90 peer-[:not(:placeholder-shown)]:translate-x-0.5 peer-[:not(:placeholder-shown)]:-translate-y-1.5 peer-[:not(:placeholder-shown)]:text-neutral-400 dark:peer-[:not(:placeholder-shown)]:text-neutral-500"
+            >Téléphone</label
+          >
+        </div>
 
-      <div class="sm:col-span-2 md:col-span-4">
-        <label
-          >Adresse
+        <div class="relative col-span-2 sm:col-span-6">
           <input
             type="text"
             name="address"
-            class="mt-1 px-4 py-2 w-full bg-neutral-100 border border-gray-400 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-pink-500 caret-pink-500"
-            formControlName="address"
+            id="hs-floating-input-address"
+            class="peer p-4 block w-full bg-neutral-100 border-gray-200 rounded-xl focus:border-pink-500 focus:ring-pink-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-600 dark:focus:border-pink-600 dark:focus:ring-pink-600 focus:pt-6 focus:pb-2 [&:not(:placeholder-shown)]:pt-6 [&:not(:placeholder-shown)]:pb-2 autofill:pt-6 autofill:pb-2"
             placeholder=""
+            formControlName="address"
           />
-        </label>
-      </div>
+          <label
+            for="hs-floating-input-address"
+            class="absolute top-0 start-0 p-4 h-full truncate pointer-events-none transition ease-in-out duration-100 border border-transparent origin-[0_0] peer-disabled:opacity-50 peer-disabled:pointer-events-none peer-focus:scale-90 peer-focus:translate-x-0.5 peer-focus:-translate-y-1.5 peer-focus:text-neutral-700 dark:peer-focus:text-neutral-300 peer-[:not(:placeholder-shown)]:scale-90 peer-[:not(:placeholder-shown)]:translate-x-0.5 peer-[:not(:placeholder-shown)]:-translate-y-1.5 peer-[:not(:placeholder-shown)]:text-neutral-400 dark:peer-[:not(:placeholder-shown)]:text-neutral-500"
+            >Adresse</label
+          >
+        </div>
 
-      <div class="md:col-span-3">
-        <label
-          >Ville
+        <div class="relative sm:col-span-4">
           <input
             type="text"
             name="city"
-            class="mt-1 px-4 py-2 w-full bg-neutral-100 border border-gray-400 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-pink-500 caret-pink-500"
-            formControlName="city"
+            id="hs-floating-input-city"
+            class="peer p-4 block w-full bg-neutral-100 border-gray-200 rounded-xl focus:border-pink-500 focus:ring-pink-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-600 dark:focus:border-pink-600 dark:focus:ring-pink-600 focus:pt-6 focus:pb-2 [&:not(:placeholder-shown)]:pt-6 [&:not(:placeholder-shown)]:pb-2 autofill:pt-6 autofill:pb-2"
             placeholder=""
+            formControlName="city"
           />
-        </label>
-      </div>
+          <label
+            for="hs-floating-input-city"
+            class="absolute top-0 start-0 p-4 h-full truncate pointer-events-none transition ease-in-out duration-100 border border-transparent origin-[0_0] peer-disabled:opacity-50 peer-disabled:pointer-events-none peer-focus:scale-90 peer-focus:translate-x-0.5 peer-focus:-translate-y-1.5 peer-focus:text-neutral-700 dark:peer-focus:text-neutral-300 peer-[:not(:placeholder-shown)]:scale-90 peer-[:not(:placeholder-shown)]:translate-x-0.5 peer-[:not(:placeholder-shown)]:-translate-y-1.5 peer-[:not(:placeholder-shown)]:text-neutral-400 dark:peer-[:not(:placeholder-shown)]:text-neutral-500"
+            >Ville</label
+          >
+        </div>
 
-      <div class="md:col-span-1">
-        <label
-          >Code postal
+        <div class="relative sm:col-span-2">
           <input
             type="text"
             name="postalCode"
-            class="mt-1 px-4 py-2 w-full bg-neutral-100 border border-gray-400 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-pink-500 caret-pink-500"
-            formControlName="postalCode"
+            id="hs-floating-input-postalCode"
+            class="peer p-4 block w-full bg-neutral-100 border-gray-200 rounded-xl focus:border-pink-500 focus:ring-pink-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-600 dark:focus:border-pink-600 dark:focus:ring-pink-600 focus:pt-6 focus:pb-2 [&:not(:placeholder-shown)]:pt-6 [&:not(:placeholder-shown)]:pb-2 autofill:pt-6 autofill:pb-2"
             placeholder=""
+            formControlName="postalCode"
           />
-        </label>
-      </div>
+          <label
+            for="hs-floating-input-postalCode"
+            class="absolute top-0 start-0 p-4 h-full truncate pointer-events-none transition ease-in-out duration-100 border border-transparent origin-[0_0] peer-disabled:opacity-50 peer-disabled:pointer-events-none peer-focus:scale-90 peer-focus:translate-x-0.5 peer-focus:-translate-y-1.5 peer-focus:text-neutral-700 dark:peer-focus:text-neutral-300 peer-[:not(:placeholder-shown)]:scale-90 peer-[:not(:placeholder-shown)]:translate-x-0.5 peer-[:not(:placeholder-shown)]:-translate-y-1.5 peer-[:not(:placeholder-shown)]:text-neutral-400 dark:peer-[:not(:placeholder-shown)]:text-neutral-500"
+            >Code postal</label
+          >
+        </div>
 
-      @if (authService.isAuth()) {
-      <button
-        (click)="delUser()"
-        class="mt-2 py-2 w-full md:col-span-2 cursor-vernis font-semibold border border-pink-300 hover:border-pink-600 rounded-xl"
+        @if (authService.isAuth()) {
+        <button
+          (click)="delUser()"
+          class="mt-2 py-2 w-full col-span-2 sm:col-span-3 cursor-vernis font-semibold border border-pink-300 hover:border-pink-600 rounded-xl"
+        >
+          Supprimer votre compte
+        </button>
+        }
+
+        <button
+          [disabled]="accountForm.invalid"
+          type="submit"
+          class="mt-2 py-2 w-full col-span-2 sm:col-start-5 sm:col-span-2 cursor-vernis font-semibold border border-pink-300 hover:text-white hover:bg-gradient-to-r hover:from-pink-500 hover:to-purple-500 rounded-xl disabled:opacity-20"
+        >
+          Valider
+        </button>
+      </form>
+
+      @if(isProvider){
+
+      <form
+        [formGroup]="serviceForm"
+        (ngSubmit)="ajoutService()"
+        class="grid gap-4 gap-y-2 grid-cols-2 sm:grid-cols-4"
       >
-        Supprimer votre compte
-      </button>
+        <div class="relative col-span-2">
+          <input
+            type="text"
+            name="serviceName"
+            id="hs-floating-input-serviceName"
+            class="peer p-4 block w-full bg-neutral-100 border-gray-200 rounded-xl focus:border-pink-500 focus:ring-pink-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-600 dark:focus:border-pink-600 dark:focus:ring-pink-600 focus:pt-6 focus:pb-2 [&:not(:placeholder-shown)]:pt-6 [&:not(:placeholder-shown)]:pb-2 autofill:pt-6 autofill:pb-2"
+            placeholder=""
+            formControlName="serviceName"
+          />
+          <label
+            for="hs-floating-input-serviceName"
+            class="absolute top-0 start-0 p-4 h-full truncate pointer-events-none transition ease-in-out duration-100 border border-transparent origin-[0_0] peer-disabled:opacity-50 peer-disabled:pointer-events-none peer-focus:scale-90 peer-focus:translate-x-0.5 peer-focus:-translate-y-1.5 peer-focus:text-neutral-700 dark:peer-focus:text-neutral-300 peer-[:not(:placeholder-shown)]:scale-90 peer-[:not(:placeholder-shown)]:translate-x-0.5 peer-[:not(:placeholder-shown)]:-translate-y-1.5 peer-[:not(:placeholder-shown)]:text-neutral-400 dark:peer-[:not(:placeholder-shown)]:text-neutral-500"
+            >Ajouter un service</label
+          >
+        </div>
+
+        <div class="relative">
+          <input
+            type="number"
+            name="servicePrice"
+            id="hs-floating-input-servicePrice"
+            class="peer p-4 block w-full bg-neutral-100 border-gray-200 rounded-xl focus:border-pink-500 focus:ring-pink-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-600 dark:focus:border-pink-600 dark:focus:ring-pink-600 focus:pt-6 focus:pb-2 [&:not(:placeholder-shown)]:pt-6 [&:not(:placeholder-shown)]:pb-2 autofill:pt-6 autofill:pb-2"
+            placeholder=""
+            formControlName="servicePrice"
+          />
+          <label
+            for="hs-floating-input-servicePrice"
+            class="absolute top-0 start-0 p-4 h-full truncate pointer-events-none transition ease-in-out duration-100 border border-transparent origin-[0_0] peer-disabled:opacity-50 peer-disabled:pointer-events-none peer-focus:scale-90 peer-focus:translate-x-0.5 peer-focus:-translate-y-1.5 peer-focus:text-neutral-700 dark:peer-focus:text-neutral-300 peer-[:not(:placeholder-shown)]:scale-90 peer-[:not(:placeholder-shown)]:translate-x-0.5 peer-[:not(:placeholder-shown)]:-translate-y-1.5 peer-[:not(:placeholder-shown)]:text-neutral-400 dark:peer-[:not(:placeholder-shown)]:text-neutral-500"
+            >Prix</label
+          >
+        </div>
+
+        <button
+          type="submit"
+          [disabled]="serviceForm.invalid"
+          class="py-2 w-full cursor-vernis font-semibold border border-pink-300 hover:text-white hover:bg-gradient-to-r hover:from-pink-500 hover:to-purple-500 rounded-xl disabled:opacity-20"
+        >
+          Ajouter
+        </button>
+      </form>
       }
-
-      <button
-        [disabled]="accountForm.invalid"
-        type="submit"
-        class="mt-2 py-2 w-full md:col-start-4 cursor-vernis font-semibold border border-pink-300 hover:text-white hover:bg-gradient-to-r hover:from-pink-500 hover:to-purple-500 rounded-xl disabled:opacity-20"
-      >
-        Valider
-      </button>
-    </form>
+    </div>
   </div>
 </div>

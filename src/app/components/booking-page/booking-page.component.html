@@ -162,8 +162,15 @@
         <p class="font-semibold p-4">Choix du créneau :</p>
         <input
           type="date"
+          name="date"
           [min]="todayString"
-          class="px-4 py-2 bg-neutral-100 border border-gray-400 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-pink-500 caret-pink-500"
+          class="p-2 bg-neutral-100 border border-gray-400 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-pink-500 caret-pink-500"
+        />
+        <input
+          type="time"
+          name="time"
+          step="3600"
+          class="mx-4 p-2 bg-neutral-100 border border-gray-400 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-pink-500 caret-pink-500"
         />
       </div>
       <div class="grid grid-cols-2 items-center m-4 gap-4">

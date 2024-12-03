@@ -3,6 +3,7 @@ import { UserService } from '../../services/user.service';
 import {
   FormControl,
   FormGroup,
+  FormsModule,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
@@ -12,22 +13,26 @@ import { AuthService } from '../../services/auth.service';
 @Component({
   selector: 'app-account',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, FormsModule],
   templateUrl: './account.component.html',
   styleUrl: './account.component.css',
 })
 export class AccountComponent {
   readonly user = signal<User>(new User());
   public accountForm = new FormGroup({
-    id: new FormControl(0, Validators.required),
-    name: new FormControl('', Validators.required),
-    surname: new FormControl('', Validators.required),
+    firstname: new FormControl('', Validators.required),
+    lastname: new FormControl('', Validators.required),
     email: new FormControl('', Validators.required),
     telephone: new FormControl('', Validators.required),
     address: new FormControl('', Validators.required),
     city: new FormControl('', Validators.required),
     postalCode: new FormControl('', Validators.required),
   });
+  public serviceForm = new FormGroup({
+    serviceName: new FormControl('', Validators.required),
+    servicePrice: new FormControl(undefined, Validators.required),
+  });
+  public isProvider: boolean = true;
 
   constructor(
     public serviceUser: UserService,
@@ -45,8 +50,8 @@ export class AccountComponent {
   }
 
   public delUser(): void {
-    this.serviceUser
-      .delUser(this.accountForm.get('id')?.getRawValue())
-      .subscribe();
+    this.serviceUser.delUser(this.user().id).subscribe();
   }
+
+  public ajoutService(): void {}
 }

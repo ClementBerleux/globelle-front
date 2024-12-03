@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { User } from '../../models/user';
 import { AuthService } from '../../services/auth.service';
+import { Provider } from '../../models/provider';
 
 @Component({
   selector: 'app-account',
@@ -18,6 +19,7 @@ import { AuthService } from '../../services/auth.service';
 })
 export class AccountComponent {
   readonly user = signal<User>(new User());
+  readonly provider = signal<Provider>(new Provider());
   public accountForm = new FormGroup({
     firstname: new FormControl('', Validators.required),
     lastname: new FormControl('', Validators.required),
@@ -35,6 +37,7 @@ export class AccountComponent {
     languageName: new FormControl('', Validators.required),
   });
   public isProvider: boolean = true;
+  public disponibilites = signal('0000000');
 
   constructor(
     public serviceUser: UserService,
@@ -58,4 +61,14 @@ export class AccountComponent {
   public ajoutService(): void {}
 
   public ajoutLanguage(): void {}
+
+  public toggleDispo(numJour: number): void {
+    let nouvelleDispo = '0';
+    if (this.disponibilites()[numJour] == '0') nouvelleDispo = '1';
+    this.disponibilites.set(
+      this.disponibilites().substring(0, numJour) +
+        nouvelleDispo +
+        this.disponibilites().substring(numJour + 1)
+    );
+  }
 }

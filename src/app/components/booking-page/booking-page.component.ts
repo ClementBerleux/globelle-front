@@ -20,7 +20,7 @@ export class BookingPageComponent {
   readonly idProvider = signal(0);
   readonly selection = signal('');
   public today: Date = new Date(Date.now());
-  public todayString: string;
+  public todayString: string = '';
   public formGroup = new FormGroup({
     service: new FormControl('', { nonNullable: true }),
   });
@@ -30,14 +30,7 @@ export class BookingPageComponent {
     public location: Location,
     public userService: UserService,
     public authService: AuthService
-  ) {
-    this.todayString =
-      this.today.getFullYear() +
-      '-' +
-      this.today.getMonth() +
-      '-' +
-      this.today.getDate();
-  }
+  ) {}
 
   ngOnInit() {
     this.route.paramMap.subscribe((params) =>
@@ -49,11 +42,18 @@ export class BookingPageComponent {
     this.userService
       .getServices(this.idProvider())
       .subscribe((data) => this.services.set(data));
-    // console.log('Date : ' + Date.now())
+    this.todayString =
+      this.today.getFullYear() +
+      '-' +
+      this.today.getMonth() +
+      '-0' +
+      this.today.getDate();
+    console.log('Date : ');
+    console.log(this.todayString);
   }
 
   onSubmit(): void {
-    // console.log(this.formGroup.value)
+    console.log(this.formGroup.value);
   }
 
   inputChange(serviceName: string): void {

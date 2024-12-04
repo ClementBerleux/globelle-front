@@ -40,13 +40,13 @@ export class UserService {
 
   getServices(id: number): Observable<Service[]> {
     return this.http.get<Service[]>(
-      environment.BACKEND_URL + '/users/1/' + id + '/services'
+      environment.BACKEND_URL + '/users/provider/' + id + '/services'
     );
   }
 
   getProvidersSearch(search: string): Observable<Provider[]> {
     return this.http.get<Provider[]>(
-      environment.BACKEND_URL + '/users/1/search?service=' + search
+      environment.BACKEND_URL + '/users/provider/search?service=' + search
     );
   }
 }

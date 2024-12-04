@@ -4,7 +4,7 @@ export class Provider {
   lastname: string = '';
   urlImage: string = '';
   note: number = 3;
-  nb_opinions: number = 0;
+  nbOpinions: number = 0;
   dispo: string = '0000000';
   description: string = '';
   backlisted: boolean = false;

@@ -11,7 +11,7 @@ import { UserToken } from '../models/user-token';
 export class AuthService {
   private apiUrl = 'http://localhost:8080/api/auth';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   login(email: string, motDePasse: string): Observable<any> {
     return this.http
@@ -26,8 +26,8 @@ export class AuthService {
       );
   }
 
-  register(user: User, roleProvider:boolean): Observable<any> {
-    if(roleProvider) return this.http.post(`${this.apiUrl}/register/1`, user);
+  register(user: User, roleProvider: boolean): Observable<any> {
+    if (roleProvider) return this.http.post(`${this.apiUrl}/register/1`, user);
     else return this.http.post(`${this.apiUrl}/register/2`, user);
   }
 
@@ -35,7 +35,7 @@ export class AuthService {
     // Get token from localStorage
     const token = localStorage.getItem('token');
     if (!token) {
-      return new UserToken;
+      return new UserToken();
     }
 
     try {
@@ -43,7 +43,7 @@ export class AuthService {
       const tokenPayload = JSON.parse(atob(token.split('.')[1]));
       // console.info(tokenPayload)
       // Return roles from token payload, or empty array if no roles found
-      const userToken:UserToken = new UserToken;
+      const userToken: UserToken = new UserToken();
       userToken.id = tokenPayload.id || 0;
       userToken.username = tokenPayload.username || '';
       userToken.firstname = tokenPayload.firstname || '';
@@ -52,12 +52,13 @@ export class AuthService {
       return userToken;
     } catch (error) {
       console.error('Error decoding token:', error);
-      return new UserToken;
+      return new UserToken();
     }
   }
 
   logout(): void {
     localStorage.removeItem('token'); // Remove the token
+    this.router.navigate(['']);
   }
 
   isAuthenticated(): boolean {

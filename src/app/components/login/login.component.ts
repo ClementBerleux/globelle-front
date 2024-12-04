@@ -19,9 +19,8 @@ export class LoginComponent {
   constructor(public router: Router, public authService: AuthService) {}
 
   public connect(): void {
-    // let user = new User;
-    // user.email = this.email
-    // user.pa = this.email
-    this.authService.login(this.email, this.motDePasse).subscribe(() => this.router.navigate(['']));
+    this.authService
+      .login(this.email, this.motDePasse)
+      .subscribe(() => this.router.navigate(['']));
   }
 }

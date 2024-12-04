@@ -1,15 +1,19 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from '../models/user';
 import { environment } from '../../environments/environment';
 import { Provider } from '../models/provider';
 import { Service } from '../models/service';
+import { Reservation } from '../models/reservation';
 
 @Injectable({
   providedIn: 'root',
 })
-export class UserService {
+
+export class UserService { 
+  private token = localStorage.getItem('token');
+
   constructor(public http: HttpClient) {}
 
   getClients(): Observable<User[]> {
@@ -48,5 +52,13 @@ export class UserService {
     return this.http.get<Provider[]>(
       environment.BACKEND_URL + '/users/provider/search?service=' + search
     );
+  }
+
+  getReservations(): Observable<Reservation[]> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.token}`
+    });
+    return this.http.get<Reservation[]>(environment.BACKEND_URL + '/users/client/31/reservations', { 'headers': headers });
   }
 }

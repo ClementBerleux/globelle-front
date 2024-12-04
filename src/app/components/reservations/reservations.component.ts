@@ -1,6 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Provider } from '../../models/provider';
+import { Reservation } from '../../models/reservation';
 import { FormsModule } from '@angular/forms';
 import { Location } from '@angular/common';
 import { UserService } from '../../services/user.service';
@@ -14,7 +14,7 @@ import { UserService } from '../../services/user.service';
 })
 export class ReservationsComponent {
   readonly search = signal<string>('');
-  readonly providers = signal<Provider[]>([]);
+  readonly reservations = signal<Reservation[]>([]);
 
   constructor(
     public route: ActivatedRoute,
@@ -26,8 +26,8 @@ export class ReservationsComponent {
     this.route.queryParamMap.subscribe((params) => {
       this.search.set(params.get('search') || '');
       this.userService
-        .getProviders()
-        .subscribe((data) => this.providers.set(data));
+        .getReservations()
+        .subscribe((data) => this.reservations.set(data));
     });
   }
 }

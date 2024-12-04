@@ -4,18 +4,18 @@ import { User } from '../models/user';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { UserToken } from '../models/user-token';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:8080/api/auth';
 
   constructor(private http: HttpClient, private router: Router) {}
 
   login(email: string, motDePasse: string): Observable<any> {
     return this.http
-      .post<{ accessToken: string }>(`${this.apiUrl}/login`, {
+      .post<{ accessToken: string }>(environment.BACKEND_URL + '/api/auth/login', {
         email: email,
         password: motDePasse,
       })
@@ -27,8 +27,8 @@ export class AuthService {
   }
 
   register(user: User, roleProvider: boolean): Observable<any> {
-    if (roleProvider) return this.http.post(`${this.apiUrl}/register/1`, user);
-    else return this.http.post(`${this.apiUrl}/register/2`, user);
+    if (roleProvider) return this.http.post(environment.BACKEND_URL + '/api/auth/register/1', user);
+    else return this.http.post(environment.BACKEND_URL + '/api/auth/register/2', user);
   }
 
   getUserToken(): UserToken {

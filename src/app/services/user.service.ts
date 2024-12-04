@@ -10,8 +10,7 @@ import { Reservation } from '../models/reservation';
 @Injectable({
   providedIn: 'root',
 })
-
-export class UserService { 
+export class UserService {
   private token = localStorage.getItem('token');
 
   constructor(public http: HttpClient) {}
@@ -54,11 +53,21 @@ export class UserService {
     );
   }
 
-  getReservations(): Observable<Reservation[]> {
+  getReservations(id: number, isProvider: boolean): Observable<Reservation[]> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${this.token}`
+      Authorization: `Bearer ${this.token}`,
     });
-    return this.http.get<Reservation[]>(environment.BACKEND_URL + '/users/client/31/reservations', { 'headers': headers });
+
+    if (isProvider)
+      return this.http.get<Reservation[]>(
+        environment.BACKEND_URL + '/users/provider/' + id + '/reservations',
+        { headers: headers }
+      );
+    else
+      return this.http.get<Reservation[]>(
+        environment.BACKEND_URL + '/users/client/' + id + '/reservations',
+        { headers: headers }
+      );
   }
 }

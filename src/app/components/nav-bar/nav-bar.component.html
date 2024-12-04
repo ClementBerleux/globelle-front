@@ -7,22 +7,24 @@
   </h1>
   <div class="flex flex-col sm:flex-row items-center sm:gap-4">
     @if(authService.isAuthenticated()){
-    <p>Bienvenue {{ authService.getUserToken().firstname }} !</p>
+    <p class="underline underline-offset-8 decoration-pink-500">
+      Bienvenue {{ authService.getUserToken().firstname }} !
+    </p>
     <p
       routerLink="/reservations"
-      class="cursor-vernis hover:bg-neutral-100 dark:hover:bg-neutral-700 rounded-lg p-2"
+      class="cursor-vernis hover:bg-neutral-100 dark:hover:bg-neutral-700 rounded-lg p-2 hover:underline underline-offset-8 decoration-pink-500"
     >
       Mes réservations
     </p>
     <p
       routerLink="/account"
-      class="cursor-vernis hover:bg-neutral-100 dark:hover:bg-neutral-700 rounded-lg p-2"
+      class="cursor-vernis hover:bg-neutral-100 dark:hover:bg-neutral-700 rounded-lg p-2 hover:underline underline-offset-8 decoration-pink-500"
     >
       Mon compte
     </p>
     <div
       (click)="authService.logout()"
-      class="flex flex-col justify-center items-center p-2 cursor-vernis hover:bg-neutral-100 dark:hover:bg-neutral-700 rounded-lg"
+      class="flex flex-col justify-center items-center p-2 cursor-vernis hover:bg-neutral-100 dark:hover:bg-neutral-700 rounded-lg hover:underline underline-offset-8 decoration-pink-500"
     >
       <svg
         width="24"

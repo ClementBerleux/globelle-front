@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { FormsModule } from '@angular/forms';
-import { User } from '../../models/user';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-login',
@@ -16,11 +16,15 @@ export class LoginComponent {
   public email: string = '';
   public motDePasse: string = '';
 
-  constructor(public router: Router, public authService: AuthService) {}
+  constructor(
+    public router: Router,
+    public authService: AuthService,
+    public location: Location
+  ) {}
 
   public connect(): void {
     this.authService
       .login(this.email, this.motDePasse)
-      .subscribe(() => this.router.navigate(['']));
+      .subscribe(() => this.location.back());
   }
 }

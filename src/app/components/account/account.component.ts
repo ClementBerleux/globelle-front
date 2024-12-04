@@ -20,13 +20,13 @@ import { Router } from '@angular/router';
   styleUrl: './account.component.css',
 })
 export class AccountComponent {
-  readonly userToken = signal<UserToken>(new UserToken);
-  readonly provider = signal<Provider>(new Provider);
+  readonly userToken = signal<UserToken>(new UserToken());
+  readonly provider = signal<Provider>(new Provider());
   public accountForm = new FormGroup({
     firstname: new FormControl('', Validators.required),
     lastname: new FormControl('', Validators.required),
     email: new FormControl('', Validators.required),
-    password: new FormControl('', Validators.required),
+    password: new FormControl(''),
     address: new FormControl('', Validators.required),
     postalCode: new FormControl('', Validators.required),
     city: new FormControl('', Validators.required),
@@ -39,22 +39,20 @@ export class AccountComponent {
   public languageForm = new FormGroup({
     languageName: new FormControl('', Validators.required),
   });
-  public isProvider: boolean = true;
   public disponibilites = signal('0000000');
 
   constructor(
     public router: Router,
     public userService: UserService,
     public authService: AuthService
-  ) {
-  }
+  ) {}
 
-  ngOnInit(){
-    this.userToken.set(this.authService.getUserToken())
+  ngOnInit() {
+    this.userToken.set(this.authService.getUserToken());
     if (this.authService.isAuthenticated())
       this.userService.getClient(this.userToken().id).subscribe((data) => {
         this.accountForm.patchValue(data);
-        this.accountForm.patchValue({password: '****'})
+        this.accountForm.patchValue({ password: '****' });
       });
   }
 
@@ -75,7 +73,9 @@ export class AccountComponent {
       this.userService.updateUser(this.userToken().id, user).subscribe();
     } else {
       user.password = this.accountForm.value.password || '';
-      this.authService.register(user, false).subscribe(() => this.router.navigate(['/login']));
+      this.authService
+        .register(user, false)
+        .subscribe(() => this.router.navigate(['/login']));
     }
   }
 

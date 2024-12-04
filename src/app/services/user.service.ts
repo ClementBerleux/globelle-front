@@ -10,7 +10,7 @@ import { Service } from '../models/service';
   providedIn: 'root',
 })
 export class UserService {
-  constructor(public http: HttpClient) { }
+  constructor(public http: HttpClient) {}
 
   getClients(): Observable<User[]> {
     return this.http.get<User[]>(environment.BACKEND_URL + '/users');
@@ -29,14 +29,24 @@ export class UserService {
   }
 
   getProviders(): Observable<Provider[]> {
-    return this.http.get<Provider[]>(environment.BACKEND_URL + '/users/providers');
+    return this.http.get<Provider[]>(
+      environment.BACKEND_URL + '/users/providers'
+    );
   }
 
   getProvider(id: number): Observable<Provider> {
-    return this.http.get<Provider>(environment.BACKEND_URL + '/users/providers/' + id);
+    return this.http.get<Provider>(environment.BACKEND_URL + '/users/' + id);
   }
 
   getServices(id: number): Observable<Service[]> {
-    return this.http.get<Service[]>(environment.BACKEND_URL + '/users/1/' + id + '/services');
+    return this.http.get<Service[]>(
+      environment.BACKEND_URL + '/users/1/' + id + '/services'
+    );
+  }
+
+  getProvidersSearch(search: string): Observable<Provider[]> {
+    return this.http.get<Provider[]>(
+      environment.BACKEND_URL + '/users/1/search?service=' + search
+    );
   }
 }

@@ -19,13 +19,13 @@ export class SearchResultsComponent {
     public route: ActivatedRoute,
     public router: Router,
     public userService: UserService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.route.queryParamMap.subscribe((params) => {
       this.search.set(params.get('search') || '');
       this.userService
-        .getProviders()
+        .getProvidersSearch(this.search())
         .subscribe((data) => this.providers.set(data));
     });
   }
